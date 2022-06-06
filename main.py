@@ -2,10 +2,19 @@ import requests
 import json
 import csv
 import sys
+import argparse
 
 site_api = '' #key
-site_keyword = '北京百度网讯科技有限公司'
 results_pwd = 'results.csv'
+
+
+
+def parse_args():
+    description = "you should add those parameter"
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('-t','--target',help = "输入目标单位名")
+    args = parser.parse_args()
+    return args
 
 def run_site(page):
     global site_api,site_keyword
@@ -77,5 +86,6 @@ def write_csv_title():
         print("成功写入标题")
     finally:
         f.close()
-
+args = parse_args()
+site_keyword = args.target
 main()
